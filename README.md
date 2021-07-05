@@ -15,7 +15,6 @@
 npm install discord-menus@latest
 ```
 <br>
-<br>
 
 # 🌌 Setup
 ```typescript
@@ -23,7 +22,6 @@ const { DiscordMenus } = require('discord-menus');
 // Or typescript
 import { DiscordMenus } from 'discord-menus';
 ```
-<br>
 <br>
 
 # 💻 Code example
@@ -62,7 +60,6 @@ MenusManager.on('MENU_CLICKED', (menu) => {
 client.login('');
 ```
 <br>
-<br>
 
 # 📷 Image
 ![Image 1](https://media.discordapp.net/attachments/859466472237957142/861637984716718080/2021-07-05_18h01_29.png)
@@ -72,14 +69,12 @@ client.login('');
 ![Image 2](https://cdn.discordapp.com/attachments/859466472237957142/861637986243444776/2021-07-05_18h01_40.png)
 
 <br>
-<br>
 
 # 👥 Contact
 ![Discord Banner 1](https://discordapp.com/api/guilds/713699044811341895/widget.png?style=banner1)
 
 **You can join the RemyK Dev Discord server using [this link](https://discord.gg/NBU6jzUMzR)**
 
-<br>
 <br>
 
 # 🚀 Others
