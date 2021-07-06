@@ -176,7 +176,7 @@ export class Menu {
 
   /**
    * Edit the message button
-   * @param {string|number|DiscordEmbed} message
+   * @param {string|MessageEmbed} message
    * @param {SendOptions} options
    * @returns {Promise<void>}
    * @example menu.edit('some edit');

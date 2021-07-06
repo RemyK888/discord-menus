@@ -1,5 +1,5 @@
 import { DiscordMenus, ButtonBuilder, MenuBuilder } from '../src/index';
-import { Client, MessageEmbed } from 'discord.js';
+import { Client, MessageEmbed, MessageFlags } from 'discord.js';
 
 const client = new Client();
 const MenusManager = new DiscordMenus(client);
@@ -16,6 +16,8 @@ const myCoolMenu = new MenuBuilder()
             name: '🌌'
         }
     })
+    .setMaxValues(3)
+    .setMinValues(1)
     .setCustomID('cool-custom-id')
     .setPlaceHolder('Select an option');
 
@@ -27,20 +29,29 @@ const coolButton2 = new ButtonBuilder()
 
 client.on('message', async (message) => {
     if (message.content === 'menu') {
-        await MenusManager.sendMenu(message, 'Select an option', { menu: myCoolMenu }).catch(err => console.error(err))
+        await MenusManager.sendMenu(message, 'Select an option', { menu: myCoolMenu }).catch(err => console.error(err));
+    }
+    if (message.content === 'button') {
+        await MenusManager.sendButton(message, 'Click a button', { buttons: [coolButton1, coolButton2] }).then(async msg => {
+            await msg.edit('Some edit')
+        })
     }
 })
 
 MenusManager.on('BUTTON_CLICKED', (button) => {
-    console.log(button.customID)
     if (button.customID === 'coolButton2') {
         button.think()
     }
 });
 
 MenusManager.on('MENU_CLICKED', (menu) => {
-    menu.reply('some reply')
-    console.log(menu.values);
+    if (menu.customID === 'cool-custom-id') {
+        if (menu.values[0].toLowerCase() === 'value-3') {
+            return menu.reply('Value 3!');
+        } else {
+            return menu.defer();
+        }
+    }
 })
 
 client.login('');

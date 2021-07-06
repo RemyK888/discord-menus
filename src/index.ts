@@ -7,3 +7,4 @@ export * from './structures/ButtonBuilder';
 export * from './structures/Button';
 export * from './structures/Menu';
 export * from './structures/Message';
+export * from './structures/SentMessage';

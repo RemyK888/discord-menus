@@ -44,6 +44,16 @@ export class MenuBuilder {
    */
   public placeHolder!: string;
 
+  /**
+   * The menu max values
+   */
+  public maxValues!: number;
+
+  /**
+   * The menu min values
+   */
+  public minValues!: number;
+
   constructor() {
     this.options = [];
   }
@@ -92,6 +102,30 @@ export class MenuBuilder {
   }
 
   /**
+   * Set the menu min values
+   * @param {number} value
+   * @returns {MenuBuilder}
+   * @example new MenuBuilder().setMinValues(1);
+   */
+  public setMinValues(value: number): MenuBuilder {
+    if (!value || typeof value !== 'number') throw new SyntaxError('INVALID_MIN_VALUE');
+    this.minValues = value;
+    return this;
+  }
+
+  /**
+   * Set the menu max values
+   * @param {number} value Up to **`25`**
+   * @returns {MenuBuilder}
+   * @example new MenuBuilder().setMaxValues(3);
+   */
+  public setMaxValues(value: number): MenuBuilder {
+    if (!value || typeof value !== 'number') throw new SyntaxError('INVALID_MAX_VALUE');
+    this.maxValues = value;
+    return this;
+  }
+
+  /**
    * Return the menu JSON object
    * @returns {object}
    */
@@ -107,8 +141,8 @@ export class MenuBuilder {
         custom_id: this.customID,
         options: this.options,
         placeholder: this.placeHolder,
-        min_values: 1,
-        max_values: Object.keys(this.options).length,
+        min_values: this.minValues === undefined ? 1 : this.minValues,
+        max_values: this.maxValues === undefined ? Object.keys(this.options).length : this.maxValues,
       };
     }
     throw new Error('INVALID_MENU');

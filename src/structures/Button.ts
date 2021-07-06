@@ -94,7 +94,6 @@ export class Button {
    * @param {any} emitter
    */
   constructor(data: any, token: string, emitter: any) {
-    console.log(data);
     this._token = token;
     this.emitter = emitter;
     this.message = new Message(data.message, this._token, this);

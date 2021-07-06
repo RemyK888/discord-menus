@@ -6,6 +6,7 @@ import { Menu } from './Menu';
 import { ButtonBuilder } from './ButtonBuilder';
 import { MenuBuilder } from './MenuBuilder';
 import { Button } from './Button';
+import { SentMessage } from './SentMessage';
 
 type Errors = 'POST_ERROR' | 'DELETE_ERROR';
 
@@ -15,6 +16,7 @@ interface DiscordMenusEvents {
   MENU_CLICKED: [menu: Menu];
   ERROR: [error: Errors];
   WARN: [warn: Warns];
+  READY: [];
   BUTTON_CLICKED: [button: Button];
 }
 
@@ -68,16 +70,21 @@ export class DiscordMenus extends EventEmitter {
    * @param {Message} message
    * @param {string|MessageEmbed} content
    * @param {SendOptions} options
-   * @returns {Promise<void>}
+   * @returns {Promise<SentMessage>}
    * @example MenusManager.sendMenu(message, 'content', { menu: myCoolMenu });
    */
-  public async sendMenu(message: Message, content: string | MessageEmbed, options?: SendOptionsMenu): Promise<void> {
+  public async sendMenu(
+    message: Message,
+    content: string | MessageEmbed,
+    options?: SendOptionsMenu,
+  ): Promise<SentMessage> {
     if (!content) throw new SyntaxError('INVALID_MESSAGE');
     const payload = {
       content: '' as any,
       embeds: [] as any,
       components: [] as any,
     };
+    let returnData;
     switch (typeof content) {
       case 'string':
         payload.content = content;
@@ -107,13 +114,13 @@ export class DiscordMenus extends EventEmitter {
         Authorization: 'Bot ' + this.client.token,
       },
       body: JSON.stringify(payload),
-    }).then((res) => {
+    }).then(async (res) => {
       if (res.status !== 200) {
         this.emit('ERROR', 'POST_ERROR');
       }
-      return;
+      returnData = await res.json();
     });
-    return;
+    return new SentMessage(returnData, this.client.token, this);
   }
 
   /**
@@ -121,20 +128,21 @@ export class DiscordMenus extends EventEmitter {
    * @param {Message} message
    * @param {string|MessageEmbed} content
    * @param {SendOptions} options
-   * @returns {Promise<void>}
+   * @returns {Promise<SentMessage>}
    * @example MenusManager.sendButton(message, 'content', { buttons: [button1, button2] });
    */
   public async sendButton(
     message: Message,
     content: string | MessageEmbed,
     options?: SendOptionsButton,
-  ): Promise<void> {
+  ): Promise<SentMessage> {
     if (!content) throw new SyntaxError('INVALID_MESSAGE');
     const payload = {
       content: '' as any,
       embeds: [] as any,
       components: [] as any,
     };
+    let returnData;
     switch (typeof content) {
       case 'string':
         payload.content = content;
@@ -166,16 +174,17 @@ export class DiscordMenus extends EventEmitter {
         Authorization: 'Bot ' + this.client.token,
       },
       body: JSON.stringify(payload),
-    }).then((res) => {
+    }).then(async (res) => {
       if (res.status !== 200) {
         this.emit('ERROR', 'POST_ERROR');
       }
-      return;
+      returnData = await res.json();
     });
-    return;
+    return new SentMessage(returnData, this.client.token, this);
   }
 
   private async _awaitEvents(): Promise<void> {
+    this.emit('READY');
     this.client.ws.on('INTERACTION_CREATE', (interaction: any) => {
       if (interaction.data.component_type === 3) {
         this.emit('MENU_CLICKED', new Menu(interaction, this.client.token, this));
