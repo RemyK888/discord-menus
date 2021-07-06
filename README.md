@@ -21,7 +21,7 @@ import { DiscordMenus } from 'discord-menus';
 
 ## 💻 Code example
 
-All the code examples are available in the `tests` folder of the project, available on **[Github](https://github.com/RemyK888/discord-menus)**, the documentation is coming soon, for more information, join the **[RemyK Discord server](https://discord.gg/ZCzxymB)**
+All the code examples are available in the `tests` folder of the project, available on **[Github](https://github.com/RemyK888/discord-menus)**, the documentation is available [here](https://www.discord-menus.remyk.net/#/), for more information, join the **[RemyK Discord server](https://discord.gg/ZCzxymB)**
 
 ```javascript
 const { DiscordMenus, ButtonBuilder, MenuBuilder } = require('discord-menus');
