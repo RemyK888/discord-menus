@@ -1,30 +1,25 @@
-<center> <h1><strong>discord-menus</strong></h1> </center>
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/835896457454026802/861942423055630346/discord-menus-logo-text.png" alt="drawing" width="450"></img>
 <br>
-<center> <a href="https://nodei.co/npm/discord-menus/"><img src="https://nodei.co/npm/discord-menus.png?downloads=true&downloadRank=true&stars=true"></a> </center>
+<a href="https://nodei.co/npm/discord-menus/"><img src="https://nodei.co/npm/discord-menus.png?downloads=true&downloadRank=true&stars=true"></a>
 <br>
-<center>
+<img src="https://forthebadge.com/images/badges/made-with-typescript.svg" alt="Made with Typescript"></img>
+</p>
+<br>
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
-
-[![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
-
-</center>
-
-# 🔩 Installation
+## 🔩 Installation
 ```
 npm install discord-menus@latest
 ```
-<br>
 
-# 🌌 Setup
+## 🌌 Setup
 ```typescript
 const { DiscordMenus } = require('discord-menus');
 // Or typescript
 import { DiscordMenus } from 'discord-menus';
 ```
-<br>
 
-# 💻 Code example
+## 💻 Code example
 
 All the code examples are available in the `tests` folder of the project, available on **[Github](https://github.com/RemyK888/discord-menus)**, the documentation is coming soon, for more information, join the **[RemyK Discord server](https://discord.gg/ZCzxymB)**
 
@@ -43,12 +38,17 @@ const myCoolMenu = new MenuBuilder()
             name: '🌌'
         }
     })
+    .setMaxValues(3)
+    .setMinValues(1)
     .setCustomID('cool-custom-id')
     .setPlaceHolder('Select an option');
 
 client.on('message', async (message) => {
     if (message.content === 'menu') {
-        await MenusManager.sendMenu(message, new MessageEmbed().setDescription('Hello world!'), { menu: myCoolMenu }).catch(err => console.error(err))
+        await MenusManager.sendMenu(message, new MessageEmbed().setDescription('Hello world!'), { menu: myCoolMenu }).then(msg => {
+            console.log(msg.id);
+            await msg.edit('Some edit');
+        })
     }
 });
 
@@ -61,7 +61,7 @@ client.login('');
 ```
 <br>
 
-# 📷 Image
+## 📷 Image
 ![Image 1](https://media.discordapp.net/attachments/859466472237957142/861637984716718080/2021-07-05_18h01_29.png)
 
 <br>
@@ -70,14 +70,13 @@ client.login('');
 
 <br>
 
-# 👥 Contact
+## 👥 Contact
 ![Discord Banner 1](https://discordapp.com/api/guilds/713699044811341895/widget.png?style=banner1)
 
 **You can join the RemyK Dev Discord server using [this link](https://discord.gg/NBU6jzUMzR)**
-
 <br>
 
-# 🚀 Others
+## 🚀 Others
 
 **This package is under Apache-2.0 license**
 
