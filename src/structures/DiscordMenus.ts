@@ -69,6 +69,7 @@ export class DiscordMenus extends EventEmitter {
    * @param {string|MessageEmbed} content
    * @param {SendOptions} options
    * @returns {Promise<void>}
+   * @example MenusManager.sendMenu(message, 'content', { menu: myCoolMenu });
    */
   public async sendMenu(message: Message, content: string | MessageEmbed, options?: SendOptionsMenu): Promise<void> {
     if (!content) throw new SyntaxError('INVALID_MESSAGE');
@@ -121,6 +122,7 @@ export class DiscordMenus extends EventEmitter {
    * @param {string|MessageEmbed} content
    * @param {SendOptions} options
    * @returns {Promise<void>}
+   * @example MenusManager.sendButton(message, 'content', { buttons: [button1, button2] });
    */
   public async sendButton(
     message: Message,

@@ -34,7 +34,7 @@ client.on('message', async (message) => {
 MenusManager.on('BUTTON_CLICKED', (button) => {
     console.log(button.customID)
     if (button.customID === 'coolButton2') {
-        button.think();
+        button.think()
     }
 });
 

@@ -55,11 +55,11 @@ export class MenuBuilder {
    * @returns {MenuBuilder}
    * @example new MenuBuilder().addLabel('Label', { description: 'Some description', value: 'label' })
    */
-  public addLabel(label: string, options: LabelOptions): MenuBuilder {
-    if (!label || typeof label !== 'string') throw new SyntaxError('INVALID_LABEL');
+  public addLabel(Label: string, options: LabelOptions): MenuBuilder {
+    if (!Label || typeof Label !== 'string') throw new SyntaxError('INVALID_LABEL');
     if (!options || typeof options !== 'object') throw new SyntaxError('INVALID_LABEL_OPTIONS');
     this.options.push({
-      label: label,
+      label: Label,
       value: options.value,
       description: options.description,
       emoji: options.emoji !== undefined ? { name: options.emoji.name, id: options.emoji.id } : undefined,

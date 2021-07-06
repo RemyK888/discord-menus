@@ -124,6 +124,7 @@ export class Menu {
    * @param {string|MessageEmbed} message
    * @param {MessageOptions} options
    * @returns {Promise<void>}
+   * @example menu.reply('some reply');
    */
   public async reply(message: string | MessageEmbed, options?: MessageOptions): Promise<void> {
     if (!message) throw new SyntaxError('INVALID_MESSAGE');
@@ -178,6 +179,7 @@ export class Menu {
    * @param {string|number|DiscordEmbed} message
    * @param {SendOptions} options
    * @returns {Promise<void>}
+   * @example menu.edit('some edit');
    */
   public async edit(message: string | MessageEmbed, options?: MessageOptions): Promise<void> {
     if (!message) throw new SyntaxError('INVALID_MESSAGE');
@@ -230,6 +232,7 @@ export class Menu {
   /**
    * Thinking reply
    * @returns {Promise<void>}
+   * @example menu.think();
    */
   public async think(): Promise<void> {
     await fetch(`https://discord.com/api/v9/interactions/${this.id}/${this.token}/callback`, {
@@ -253,6 +256,7 @@ export class Menu {
   /**
    * Defer the interaction
    * @returns {Promise<void>}
+   * @example menu.defer();
    */
   public async defer(): Promise<void> {
     await fetch(`https://discord.com/api/v9/interactions/${this.id}/${this.token}/callback`, {

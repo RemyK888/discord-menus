@@ -10,7 +10,9 @@
         "esModuleInterop": true,
     },
     "include": [
-        "src"
+        "src",
+        "README.md",
+        "LICENSE"
     ],
     "exclude": [
         "node_modules",

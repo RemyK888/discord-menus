@@ -1,9 +1,9 @@
 export { version } from '../package.json';
 
-export { MenuBuilder } from './structures/MenuBuilder';
-export { DiscordMenus } from './structures/DiscordMenus';
-export { ButtonBuilder } from './structures/ButtonBuilder';
+export * from './structures/MenuBuilder';
+export * from './structures/DiscordMenus';
+export * from './structures/ButtonBuilder';
 
-export { Button } from './structures/Button';
-export { Menu } from './structures/Menu';
-export { Message } from './structures/Message';
+export * from './structures/Button';
+export * from './structures/Menu';
+export * from './structures/Message';

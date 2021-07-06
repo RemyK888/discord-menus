@@ -116,6 +116,7 @@ export class Message {
   /**
    * Delete the message
    * @returns {Promise<void>}
+   * @example menu.message.delete();
    */
   async delete(): Promise<void> {
     await fetch(`https://discord.com/api/v9/channels/${this.channelID}/messages/${this.id}`, {

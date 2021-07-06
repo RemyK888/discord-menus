@@ -1,6 +1,6 @@
 {
   "name": "discord-menus",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Create beautiful menus in Discord, with ease!",
   "main": "/src/index.ts",
   "directories": {
@@ -22,11 +22,17 @@
   },
   "keywords": [
     "discord-menus",
+    "discord menus",
+    "discord select menus",
+    "discord-select-menus",
+    "discord menu",
+    "discord-menu",
+    "discord.js menus",
+    "discord buttons",
+    "discord-buttons",
     "discord",
     "discord.js",
-    "discord api",
-    "discord buttons",
-    "discord menu"
+    "discord api"
   ],
   "author": "RemyK",
   "license": "Apache-2.0",

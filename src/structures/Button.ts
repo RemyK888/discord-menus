@@ -118,6 +118,7 @@ export class Button {
    * @param {string|MessageEmbed} message
    * @param {MessageOptions} options
    * @returns {Promise<void>}
+   * @example button.reply('some content');
    */
   public async reply(message: string | MessageEmbed, options?: MessageOptions): Promise<void> {
     if (!message) throw new SyntaxError('INVALID_MESSAGE');
@@ -172,6 +173,7 @@ export class Button {
    * @param {string|number|DiscordEmbed} message
    * @param {SendOptions} options
    * @returns {Promise<void>}
+   * @example button.edit('some edit');
    */
   public async edit(message: string | MessageEmbed, options?: MessageOptions): Promise<void> {
     if (!message) throw new SyntaxError('INVALID_MESSAGE');
@@ -224,6 +226,7 @@ export class Button {
   /**
    * Thinking reply
    * @returns {Promise<void>}
+   * @example button.think();
    */
   public async think(): Promise<void> {
     await fetch(`https://discord.com/api/v9/interactions/${this.id}/${this.token}/callback`, {
@@ -247,6 +250,7 @@ export class Button {
   /**
    * Defer the interaction
    * @returns {Promise<void>}
+   * @example button.defer();
    */
   public async defer(): Promise<void> {
     await fetch(`https://discord.com/api/v9/interactions/${this.id}/${this.token}/callback`, {
