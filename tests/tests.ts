@@ -27,13 +27,17 @@ const coolButton1 = new ButtonBuilder()
 const coolButton2 = new ButtonBuilder()
     .setStyle('BLURPLE').setLabel('Button 2').setID('coolButton2')
 
+const coolEmbed = new MessageEmbed()
+.setDescription('some description')
+.setTitle('some title');
+
 client.on('message', async (message) => {
     if (message.content === 'menu') {
         await MenusManager.sendMenu(message, 'Select an option', { menu: myCoolMenu }).catch(err => console.error(err));
     }
     if (message.content === 'button') {
         await MenusManager.sendButton(message, 'Click a button', { buttons: [coolButton1, coolButton2] }).then(async msg => {
-            await msg.edit('Some edit')
+            await msg.edit(coolEmbed)
         })
     }
 })

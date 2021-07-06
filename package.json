@@ -1,6 +1,6 @@
 {
   "name": "discord-menus",
-  "version": "1.0.6",
+  "version": "1.0.",
   "description": "Create beautiful menus in Discord, with ease!",
   "main": "./src/index.ts",
   "directories": {
@@ -39,7 +39,7 @@
   "bugs": {
     "url": "https://github.com/RemyK888/discord-menus/issues"
   },
-  "homepage": "https://github.com/RemyK888/discord-menus#readme",
+  "homepage": "https://www.discord-menus.remyk.net/",
   "devDependencies": {
     "@types/node-fetch": "^2.5.10",
     "@types/ws": "^7.4.6",
