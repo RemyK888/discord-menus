@@ -9,7 +9,12 @@ interface MessageOptions {
   /**
    * Button or button array
    */
-  buttons: ButtonBuilder | ButtonBuilder[];
+  buttons?: ButtonBuilder | ButtonBuilder[];
+
+  /**
+   * Ephemeral?
+   */
+  ephemeral?: boolean;
 }
 
 interface MemberOptions {
@@ -132,6 +137,7 @@ export class Menu {
       content: '' as any,
       embeds: [] as any,
       components: [] as any,
+      flags: options?.ephemeral ? 64 : null,
     };
     switch (typeof message) {
       case 'string':
@@ -231,10 +237,11 @@ export class Menu {
 
   /**
    * Thinking reply
+   * @param {boolean} ephemeral
    * @returns {Promise<void>}
    * @example menu.think();
    */
-  public async think(): Promise<void> {
+  public async think(ephemeral?: boolean): Promise<void> {
     await fetch(`https://discord.com/api/v9/interactions/${this.id}/${this.token}/callback`, {
       headers: {
         'Content-type': 'application/json',
@@ -242,6 +249,9 @@ export class Menu {
       },
       method: 'POST',
       body: JSON.stringify({
+        data: {
+          flags: ephemeral ? 64 : null,
+        },
         type: 5,
       }),
     }).then((res) => {

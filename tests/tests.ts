@@ -28,8 +28,8 @@ const coolButton2 = new ButtonBuilder()
     .setStyle('BLURPLE').setLabel('Button 2').setID('coolButton2')
 
 const coolEmbed = new MessageEmbed()
-.setDescription('some description')
-.setTitle('some title');
+    .setDescription('some description')
+    .setTitle('some title');
 
 client.on('message', async (message) => {
     if (message.content === 'menu') {
@@ -37,21 +37,25 @@ client.on('message', async (message) => {
     }
     if (message.content === 'button') {
         await MenusManager.sendButton(message, 'Click a button', { buttons: [coolButton1, coolButton2] }).then(async msg => {
-            await msg.edit(coolEmbed)
+            //await msg.edit(coolEmbed)
         })
     }
 })
 
 MenusManager.on('BUTTON_CLICKED', (button) => {
     if (button.customID === 'coolButton2') {
-        button.think()
+        button.reply('hey (ephemeral response)', {
+            ephemeral: true
+        })
     }
 });
 
 MenusManager.on('MENU_CLICKED', (menu) => {
     if (menu.customID === 'cool-custom-id') {
         if (menu.values[0].toLowerCase() === 'value-3') {
-            return menu.reply('Value 3!');
+            return menu.reply(coolEmbed, {
+                ephemeral: true
+            });
         } else {
             return menu.defer();
         }

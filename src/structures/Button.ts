@@ -36,7 +36,12 @@ interface MessageOptions {
   /**
    * Button or button array
    */
-  buttons: ButtonBuilder | ButtonBuilder[];
+  buttons?: ButtonBuilder | ButtonBuilder[];
+
+  /**
+   * Ephemeral?
+   */
+  ephemeral?: boolean;
 }
 
 /**
@@ -125,6 +130,7 @@ export class Button {
       content: '' as any,
       embeds: [] as any,
       components: [] as any,
+      flags: options?.ephemeral ? 64 : null,
     };
     switch (typeof message) {
       case 'string':
@@ -224,10 +230,11 @@ export class Button {
 
   /**
    * Thinking reply
+   * @param {boolean} ephemeral
    * @returns {Promise<void>}
    * @example button.think();
    */
-  public async think(): Promise<void> {
+  public async think(ephemeral?: boolean): Promise<void> {
     await fetch(`https://discord.com/api/v9/interactions/${this.id}/${this.token}/callback`, {
       headers: {
         'Content-type': 'application/json',
@@ -235,6 +242,9 @@ export class Button {
       },
       method: 'POST',
       body: JSON.stringify({
+        data: {
+          flags: ephemeral ? 64 : null,
+        },
         type: 5,
       }),
     }).then((res) => {
@@ -259,7 +269,7 @@ export class Button {
       },
       method: 'POST',
       body: JSON.stringify({
-        type: 6,
+        type: 7,
       }),
     }).then((res) => {
       if (res.status !== 200) {
