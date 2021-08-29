@@ -108,7 +108,7 @@ export class MenuBuilder {
    * @example new MenuBuilder().setMinValues(1);
    */
   public setMinValues(value: number): MenuBuilder {
-    if (!value || typeof value !== 'number') throw new SyntaxError('INVALID_MIN_VALUE');
+    if (typeof value !== 'number') throw new SyntaxError('INVALID_MIN_VALUE');
     this.minValues = value;
     return this;
   }
